@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Pilot charts mediterraneo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2" />
+    <meta name="viewport" content ="width=device-width, user-scalable=yes, initial-scale=1, minimum-scale=0.5, maximum-scale=5" />
+    <meta name="description" content="Pagina  de  Storn.es"/>
+    <link href="http://www.storn.es/favicon.ico" rel="icon" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" media="all" href="http://tools.storn.es/estil.css" />
+    <style>
+#chart {
+  max-width: 100%;
+  max-height: 100%;
+}
+html, body{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  color: #e3f2fd;
+}
+#chart-wrapper{
+  position: fixed;
+  top:0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+  text-align: center;
+}
+#title{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  padding: 15px;
+  background: #2196f3;
+  z-index: 10;
+}
+#months{
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  padding: 0px 10px;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+  background: #2196f3;
+}
+#months ul{
+  margin: 0;
+}
+#months ul li{
+  display: inline-block;
+  cursor: pointer;
+  padding: 7px;
+}
+#months li.current{
+  background: #1976d2;
+}
+#chart-preload{
+  position: fixed;
+  top: -2px;
+  left: 2px;
+  height: 1px;
+  width: 1px;
+}
+    </style>
+  </head>
+  <body class="simplePage">
+    <div id='title'>
+      <h1>Pilot charts</h1>
+    </div>
+    <div id="chart-wrapper">
+      <img src="img/pilot/1.png" id="chart" data-current="1" />
+    </div>
+    <div id="months">
+      <ul>
+        <li data-current="1" class="current">January</li> - 
+        <li data-current="2">February</li> - 
+        <li data-current="3">March</li> - 
+        <li data-current="4">April</li> - 
+        <li data-current="5">May</li> - 
+        <li data-current="6">June</li> - 
+        <li data-current="7">July</li> - 
+        <li data-current="8">August</li> - 
+        <li data-current="9">September</li> - 
+        <li data-current="10">October</li> - 
+        <li data-current="11">November</li> - 
+        <li data-current="12">December</li>
+      </ul>
+    </div>
+    <img id="chart-preload"/>
+    <span class="storn-logo storn-logo-sticker"></span>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
+    <script type="text/javascript">
+$(function() {
+  $('#chart').click(function(){
+    var current = $(this).attr('data-current');
+    current++;
+    if (current > 12) {
+      current = 1;
+    }
+    setImage(current);
+  });
+  $('#months ul li').click(function(){
+    var current = $(this).attr('data-current');
+    setImage(current);
+  });
+  preload();
+});
+function setImage(image){
+  $('#chart').attr('src', 'img/pilot/'+image+'.png');
+  $('#chart').attr('data-current', image);
+  $('#months li').removeClass('current');
+  $('#months li[data-current='+image+']').addClass('current');
+}
+function preload(){
+  for (var i = 2; i <= 12; i++) {
+    $('#chart-preload').attr('src', 'img/pilot/'+i+'.png');
+  };
+}
+    </script>
+  </body>
+</html>
